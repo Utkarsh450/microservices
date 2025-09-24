@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const productSchama = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -31,4 +31,6 @@ const productSchama = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("Products", productSchama);
+productSchema.index({ title: "text", description: "text" });
+
+module.exports = mongoose.model("Products", productSchema);
