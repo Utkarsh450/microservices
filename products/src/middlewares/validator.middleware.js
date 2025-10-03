@@ -1,10 +1,17 @@
 const { body, validationResult } = require('express-validator');
+// Generic validator error handler
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+   next();
+};
 
 const allowedCurrencies = ['INR', 'USD', 'EUR'];
 
 const createProductValidations = [
   body('title')
-    .withMessage('title is required')
     .isString()
     .withMessage('title must be a string')
     .trim()
@@ -19,7 +26,6 @@ const createProductValidations = [
     .withMessage('description too long'),
 
   body('priceAmount')
-    .withMessage('priceAmount is required')
     .bail()
     .isNumeric()
     .withMessage('priceAmount must be a number')
@@ -37,15 +43,6 @@ const createProductValidations = [
 
     validate
 ];
-
-// Generic validator error handler
-const validate = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-   next();
-};
 
 module.exports = {
   createProductValidations,

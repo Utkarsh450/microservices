@@ -4,12 +4,11 @@ const { registerController, loginController, getCurrentUser, logoutUserControlle
 const { authUser } = require("../middlewares/auth.middlewares");
 const router = express.Router();
 
-router.post("/register",registerUserValidations, registerUserValidations, registerController);
+router.post("/register",registerUserValidations, registerController);
 router.post('/login',loginUserValidations, loginController);
 router.get("/me",authUser,getCurrentUser);
 router.get("/logout", logoutUserController);
 router.get("/users/me/addresses", authUser, getUserAddress);
-router.post("/users/me/addresses",addUserAddressValidations, authUser, addUserAddress);
 router.post("/users/me/addresses",addUserAddressValidations, authUser, addUserAddress);
 router.delete("/users/me/addresses/:addressesId", authUser, deleteUserAddress);
 
