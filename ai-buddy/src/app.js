@@ -5,6 +5,6 @@ app.use(cookieParser());
 
 app.use(express.json());
 
-app.use("/api/ai-buddy", routes);
+// app.use("/api/ai-buddy", routes);
 
 module.exports = app;
